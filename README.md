@@ -1,3 +1,3 @@
-#Sam's App V1 - What's For Dinner?
+## Sam's App 1 - What's for Dinner?
 
-A simple app that allows people to keep track of their personal favourite restauraunts.
+This project is purely for my own personal learning. Licensed under the Unlicense. Do with it what you will, just have fun and be nice please.
