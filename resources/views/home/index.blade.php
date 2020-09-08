@@ -9,7 +9,9 @@
                 <div class="card-header">
                     <h4>{{$acct->handle}}'s Dashboard</h4>
                 </div>
-                <restaurant-editor> </restaurant-editor>
+                <div class="card-body">
+                    <restaurant-editor> </restaurant-editor>
+                </div>
             </div>
         </div>
     </div>
