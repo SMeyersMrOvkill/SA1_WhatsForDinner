@@ -20,17 +20,23 @@
 </template>
 <script>
     export default {
-        props: ['p_name', 'p_description'],
+        props: ['p_name', 'p_description', 'p_mode', 'p_profile'],
         data() {
             return {
                 show: false,
                 name: "",
                 description: "",
+                mode: 'NEW',
+                profile: {}
             };
         },
         mounted() {
             this.name = this.p_name;
             this.description = this.p_description;
+            this.mode = this.p_mode;
+            if(this.p_profile) {
+                this.profile = p_profile;
+            }
             console.log('RestaurantEditor component mounted.');
         },
         methods: {

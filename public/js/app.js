@@ -1962,17 +1962,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['p_name', 'p_description'],
+  props: ['p_name', 'p_description', 'p_mode', 'p_profile'],
   data: function data() {
     return {
       show: false,
       name: "",
-      description: ""
+      description: "",
+      mode: 'NEW',
+      profile: {}
     };
   },
   mounted: function mounted() {
     this.name = this.p_name;
     this.description = this.p_description;
+    this.mode = this.p_mode;
+
+    if (this.p_profile) {
+      this.profile = p_profile;
+    }
+
     console.log('RestaurantEditor component mounted.');
   },
   methods: {
