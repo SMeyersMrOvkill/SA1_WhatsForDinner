@@ -6,7 +6,7 @@
             <span>Add a restaurant:</span> <button class="btn btn-danger float-right" v-on:click="show = false"><i class="fa fa-times"></i></button>
         </div>
         <div class="card-body">
-            <form>
+            <form v-on:submit.prevent>
                 <label for="name">Name: </label>
                 <input class="form-control" id="name" name="name" v-model="name" />
                 <label for="description">Description: </label>
@@ -20,10 +20,9 @@
 </template>
 <script>
     export default {
-        props: ['p_name', 'p_description', 'p_mode', 'p_profile'],
+        props: ['p_name', 'p_description', 'p_mode', 'p_profile', 'updateParentList', 'show'],
         data() {
             return {
-                show: false,
                 name: "",
                 description: "",
                 mode: 'NEW',
@@ -41,8 +40,18 @@
         },
         methods: {
             submit() {
-                this.preventDefault();
-                console.log("Submitted[Name: " + this.name + ", Description: " + this.description + "]");
+                console.log("Submitting [Name: " + this.name + ", Description: " + this.description + "]...");
+                var data = {
+                    restaurant: {
+                        name: this.name,
+                        description: this.description
+                    }
+                };
+                axios.post('/api/v1/restaurant/create', data).then(function(response) {
+                    console.log(response.data);
+                }).catch(function(error) {
+                    console.log(JSON.stringify(error));
+                });
             }
         }
     }

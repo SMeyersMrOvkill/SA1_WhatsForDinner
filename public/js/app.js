@@ -1985,8 +1985,18 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     submit: function submit() {
-      this.preventDefault();
-      console.log("Submitted[Name: " + this.name + ", Description: " + this.description + "]");
+      console.log("Submitting [Name: " + this.name + ", Description: " + this.description + "]...");
+      var data = {
+        restaurant: {
+          name: this.name,
+          description: this.description
+        }
+      };
+      axios.post('/api/v1/restaurant/create', data).then(function (response) {
+        console.log(response.data);
+      })["catch"](function (error) {
+        console.log(JSON.stringify(error));
+      });
     }
   }
 });
@@ -37658,73 +37668,83 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "card-body" }, [
-            _c("form", [
-              _c("label", { attrs: { for: "name" } }, [_vm._v("Name: ")]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.name,
-                    expression: "name"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { id: "name", name: "name" },
-                domProps: { value: _vm.name },
+            _c(
+              "form",
+              {
                 on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.name = $event.target.value
+                  submit: function($event) {
+                    $event.preventDefault()
                   }
                 }
-              }),
-              _vm._v(" "),
-              _c("label", { attrs: { for: "description" } }, [
-                _vm._v("Description: ")
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.description,
-                    expression: "description"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { id: "description", name: "description" },
-                domProps: { value: _vm.description },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+              },
+              [
+                _c("label", { attrs: { for: "name" } }, [_vm._v("Name: ")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.name,
+                      expression: "name"
                     }
-                    _vm.description = $event.target.value
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _c("hr"),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-success",
-                  attrs: { type: "submit", id: "submit" },
+                  ],
+                  staticClass: "form-control",
+                  attrs: { id: "name", name: "name" },
+                  domProps: { value: _vm.name },
                   on: {
-                    click: function($event) {
-                      return _vm.submit()
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.name = $event.target.value
                     }
                   }
-                },
-                [_vm._v("Submit")]
-              )
-            ])
+                }),
+                _vm._v(" "),
+                _c("label", { attrs: { for: "description" } }, [
+                  _vm._v("Description: ")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.description,
+                      expression: "description"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { id: "description", name: "description" },
+                  domProps: { value: _vm.description },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.description = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("hr"),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-success",
+                    attrs: { type: "submit", id: "submit" },
+                    on: {
+                      click: function($event) {
+                        return _vm.submit()
+                      }
+                    }
+                  },
+                  [_vm._v("Submit")]
+                )
+              ]
+            )
           ])
         ])
       : _vm._e()

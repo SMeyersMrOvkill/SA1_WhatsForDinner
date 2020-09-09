@@ -2,6 +2,8 @@
 
 use Illuminate\Database\Seeder;
 
+use App\Restaurant;
+
 class RestaurantSeeder extends Seeder
 {
     /**
@@ -11,8 +13,13 @@ class RestaurantSeeder extends Seeder
      */
     public function run()
     {
-        $acct = Account::create([
-            'uid' => 1
+        Restaurant::create([
+            // Always make it my account ID for seeded data.
+            'aid' => 1,
+            // Applebee's is yummy.
+            'name' => 'Applebee\'s Neighborhood Bar & Grill',
+            // Simple description. Doesn't have to be perfect, as each instance belongs to a user.
+            'description' => 'American-style cuisine. Burgers, cheap appetizers, decent drinks, etc...'
         ]);
     }
 }
