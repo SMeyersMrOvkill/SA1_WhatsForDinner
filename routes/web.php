@@ -28,3 +28,4 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::post('/api/v1/restaurant/create', 'RestaurantController@create');
+Route::post('/api/v1/restaurant/list/{page}', 'RestaurantController@list');

@@ -1,21 +1,31 @@
 <template>
 <div>
-<table class="table table-hover" v-if="show">
+<table class="table" v-if="show">
     <thead>
-        <tr>Name</tr>
-        <tr>Description</tr>
-        <tr>Edit</tr>
-        <tr>Delete</tr>
-        <tr><button class="btn btn-primary" v-on:click="addRestaurant()">New</button></tr>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Edit</th>
+            <th>Delete</th>
+            <th><button class="btn btn-primary" v-on:click="refresh()">New</button></th>
+        </tr>
     </thead>
+    <tbody>
+        <tr v-for="restaurant in restaurants">
+            <td>{{restaurant.name}}</td>
+            <td>{{restaurant.description}}</td>
+        </tr>
+    </tbody>
 </table>
 </div>
 </template>
 <script>
 export default {
-    props: ['restaurants'],
     data() {
         return {
+            restaurants: [],
+            page: 0,
+            show: true
         };
     },
     methods: {
@@ -25,8 +35,29 @@ export default {
         hideSelf() {
 
         },
+        addItem(item) {
+            this.restaurants.push(item);
+        },
         addRestaurant() {
             
+        },
+        refresh() {
+            this.restaurants.shift();
+            const vm = this;
+            var data = [];
+            var done = false;
+            axios.post('/api/v1/restaurant/list/'+this.page).then(function(response) {
+                console.log(response);
+                console.log(response.data);
+                console.log(response.data.data);
+                var i = JSON.parse(response.data.data);
+                vm.addItem(i[0]);
+            }).catch(function(error) {
+                console.log("ERROR"+error);
+            });
+            for(var i = 0; i < data.length; i++) {
+                this.restaurants.push(data[i]);
+            }
         }
     },
 }

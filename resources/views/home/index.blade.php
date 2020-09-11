@@ -10,7 +10,7 @@
                     <h4>{{$acct->handle}}'s Dashboard</h4>
                 </div>
                 <div class="card-body">
-                    <restaurant-editor> </restaurant-editor>
+                    <restaurant-list> </restaurant-list>
                 </div>
             </div>
         </div>

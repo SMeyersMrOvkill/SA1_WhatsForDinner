@@ -19,4 +19,3 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('/api/v1/restaurant/get/{id}', 'RestaurantController@get');
-Route::post('/api/v1/restaurant/list/{page}', 'RestaurantController@list');

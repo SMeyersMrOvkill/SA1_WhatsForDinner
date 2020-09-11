@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 
 use App\Account;
+use App\Restaurant;
 
 class RestaurantController extends Controller
 {
@@ -27,21 +28,16 @@ class RestaurantController extends Controller
         ]);
     }
 
-    public function list(Request $request, $page=0)
+    public function list(Request $request)
     {
-        $i = 0;
-        $restaurants = [];
         $user = Auth::user();
         $acct = Account::where('uid', $user->id)->first();
-        Restaurant::where('aid', $acct->id)->chunk(15, function($rests) {
-            if($i == $page) {
-                $restaurants = $rests;
-                return;
-            } else {
-                $i++;
-            }
-        });
-
+        $restaurants = Restaurant::where('aid', $acct->id)->get();
+        return response()->json([
+            'status' => 0,
+            'message' => 'OK',
+            'data' => json_encode($restaurants)
+        ]);
     }
 
     public function create(Request $request)
