@@ -2046,9 +2046,17 @@ __webpack_require__.r(__webpack_exports__);
     addItem: function addItem(item) {
       this.restaurants.push(item);
     },
+    replaceItems: function replaceItems(items) {
+      for (var i = 0; i < items.length; i++) {
+        this.addItem(items[i]);
+      }
+    },
     addRestaurant: function addRestaurant() {},
     refresh: function refresh() {
-      this.restaurants.shift();
+      for (var i = 0; i < this.restaurants.length; i++) {
+        this.restaurants.shift();
+      }
+
       var vm = this;
       var data = [];
       var done = false;
@@ -2057,15 +2065,17 @@ __webpack_require__.r(__webpack_exports__);
         console.log(response.data);
         console.log(response.data.data);
         var i = JSON.parse(response.data.data);
-        vm.addItem(i[0]);
+
+        for (var x = 0; x < i.length; x++) {
+          vm.addItem(i[x]);
+        }
       })["catch"](function (error) {
         console.log("ERROR" + error);
       });
-
-      for (var i = 0; i < data.length; i++) {
-        this.restaurants.push(data[i]);
-      }
     }
+  },
+  mounted: function mounted() {
+    this.refresh();
   }
 });
 
@@ -37860,7 +37870,7 @@ var render = function() {
                     staticClass: "btn btn-primary",
                     on: {
                       click: function($event) {
-                        return _vm.refresh()
+                        return _vm.addRestaurant()
                       }
                     }
                   },
@@ -37873,7 +37883,7 @@ var render = function() {
           _c(
             "tbody",
             _vm._l(_vm.restaurants, function(restaurant) {
-              return _c("tr", [
+              return _c("tr", { key: restaurant.id }, [
                 _c("td", [_vm._v(_vm._s(restaurant.name))]),
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(restaurant.description))])
@@ -50400,8 +50410,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/mrovkill/SA1_WhatsForDinner/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/mrovkill/SA1_WhatsForDinner/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\MrOvkill\Projects\SA1_WhatsForDinner\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\MrOvkill\Projects\SA1_WhatsForDinner\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
